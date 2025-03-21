@@ -1,0 +1,25 @@
+<form (submit)="onSubmit(myForm)" #myForm="ngForm">
+  <label for="title">Title</label>
+  <input
+    type="text"
+    name="title"
+    id="title"
+    required
+    [(ngModel)]="title"
+    (input)="checkBtnDisable()"
+  />
+  <label for="date">Date</label>
+  <input
+    type="date"
+    name="date"
+    id="date"
+    required
+    [(ngModel)]="date"
+    (input)="checkBtnDisable()"
+  />
+  <button type="submit" [disabled]="buttonDisabled()">Submit</button>
+</form>
+
+@if(dateError()){
+<p>If Chuck Norris cannot travel back in time, neither can you!</p>
+}

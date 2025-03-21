@@ -1,0 +1,13 @@
+@if(title().length){
+<div>
+  <h1>{{ title() }}</h1>
+  <p>
+    {{ days() }} days, {{ hours() }} hours, {{ minutes() }} minutes,
+    {{ seconds() }} seconds
+  </p>
+</div>
+}@else {
+<div>
+  <h1>Set your title in the form below.</h1>
+</div>
+}
