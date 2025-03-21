@@ -5,6 +5,7 @@
     name="title"
     id="title"
     required
+    [value]="title()"
     [(ngModel)]="title"
     (input)="checkBtnDisable()"
   />
@@ -14,6 +15,7 @@
     name="date"
     id="date"
     required
+    [value]="date()"
     [(ngModel)]="date"
     (input)="checkBtnDisable()"
   />
@@ -23,3 +25,5 @@
 @if(dateError()){
 <p>If Chuck Norris cannot travel back in time, neither can you!</p>
 }
+
+<button (click)="reset()">Reset Timer!</button>

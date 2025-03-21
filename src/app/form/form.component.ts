@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Form, FormsModule, NgForm } from '@angular/forms';
 import { TimerService } from '../timer.service';
 
 @Component({
@@ -14,6 +14,8 @@ export class FormComponent {
   dateError = signal<boolean>(false);
   buttonDisabled = signal<boolean>(true);
 
+  form: Form = {} as Form;
+
   private timerService = inject(TimerService);
 
   checkBtnDisable() {
@@ -25,6 +27,7 @@ export class FormComponent {
   }
 
   onSubmit(form: NgForm) {
+    this.form = form;
     if (new Date(this.date()).getTime() < new Date().getTime()) {
       this.dateError.set(true);
     } else {
@@ -32,7 +35,13 @@ export class FormComponent {
       this.timerService.setTitle(this.title());
       this.timerService.setDate(new Date(this.date()));
       form.resetForm();
-      this.timerService.calculateCountdown();
+      this.timerService.triggerCountdown();
     }
+  }
+
+  reset() {
+    this.timerService.resetTimer();
+    this.timerService.setTitle('');
+    this.date.set('');
   }
 }

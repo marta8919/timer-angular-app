@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,8 @@ export class TimerService {
   hours = signal<number>(0);
   minutes = signal<number>(0);
   seconds = signal<number>(0);
+  x: any;
+  clearInterval = signal<boolean>(false);
 
   distance: number | undefined;
 
@@ -38,11 +41,17 @@ export class TimerService {
     this.seconds.set(Math.floor((this.distance % (1000 * 60)) / 1000));
   }
 
-  x = setInterval(() => {
-    this.calculateCountdown();
-    if (this.distance !== undefined && this.distance == 0) {
-      clearInterval(this.x);
-      this.titleCountdown.set('');
-    }
-  }, 100);
+  triggerCountdown() {
+    this.x = setInterval(() => {
+      this.calculateCountdown();
+      if (this.distance !== undefined && this.distance == 0) {
+        clearInterval(this.x);
+        //render success screen
+      }
+    }, 100);
+  }
+
+  resetTimer() {
+    clearInterval(this.x);
+  }
 }
