@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -14,21 +13,33 @@ export class TimerService {
   seconds = signal<number>(0);
   x: any;
   clearInterval = signal<boolean>(false);
+  timerOn = signal<boolean>(false);
 
   distance: number | undefined;
 
-  constructor() {}
+  constructor() {
+    let localTitle = localStorage.getItem('title');
+    let localDate = localStorage.getItem('date');
+
+    if (localDate && localTitle) {
+      this.titleCountdown.set(localTitle);
+      this.dateCountdown.set(new Date(localDate));
+      this.triggerCountdown();
+    }
+  }
 
   setTitle(title: string) {
     this.titleCountdown.set(title);
+    localStorage.setItem('title', title);
   }
 
   setDate(date: Date) {
     this.dateCountdown.set(date);
+    localStorage.setItem('date', date.toString());
   }
 
   calculateCountdown() {
-    const now = new Date().getTime();              
+    const now = new Date().getTime();
     const difference = this.dateCountdown().getTime() - new Date().getTime();
     this.distance = this.dateCountdown().getTime() - now;
     this.days.set(Math.floor(difference / (1000 * 60 * 60 * 24)));
@@ -42,16 +53,19 @@ export class TimerService {
   }
 
   triggerCountdown() {
+    this.timerOn.set(true);
     this.x = setInterval(() => {
       this.calculateCountdown();
       if (this.distance !== undefined && this.distance == 0) {
         clearInterval(this.x);
-        //render success screen
       }
     }, 100);
   }
 
   resetTimer() {
     clearInterval(this.x);
+    this.timerOn.set(false);
+    localStorage.setItem('title', '');
+    localStorage.setItem('date', '');
   }
 }

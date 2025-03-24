@@ -13,19 +13,12 @@ export class FormComponent {
   date = signal<string>('');
   dateError = signal<boolean>(false);
   buttonDisabled = signal<boolean>(true);
-  timerOn = signal<boolean>(false);
 
   form: Form = {} as Form;
 
   private timerService = inject(TimerService);
 
-  checkBtnDisable() {
-    if (this.title().length && this.date().length) {
-      this.buttonDisabled.set(false);
-    } else {
-      this.buttonDisabled.set(true);
-    }
-  }
+  timerOnForm = this.timerService.timerOn;
 
   onSubmit(form: NgForm) {
     this.form = form;
@@ -35,9 +28,9 @@ export class FormComponent {
       this.dateError.set(false);
       this.timerService.setTitle(this.title());
       this.timerService.setDate(new Date(this.date()));
-      form.resetForm();
       this.timerService.triggerCountdown();
-      this.timerOn.set(true);
+      this.timerOnForm.set(true);
+      form.resetForm();
     }
   }
 
@@ -45,7 +38,12 @@ export class FormComponent {
     this.timerService.resetTimer();
     this.timerService.setTitle('');
     this.date.set('');
-    this.timerOn.set(false);
+    this.timerOnForm.set(false);
     this.buttonDisabled.set(true);
+  }
+
+  closeError() {
+    this.dateError.set(false);
+    this.date.set('');
   }
 }

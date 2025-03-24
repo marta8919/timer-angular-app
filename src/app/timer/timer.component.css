@@ -12,4 +12,7 @@ div {
   text-align: center;
   overflow-wrap: break-word;
   max-width: calc(100vw - 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

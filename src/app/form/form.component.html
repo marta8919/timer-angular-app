@@ -1,38 +1,44 @@
 <form (submit)="onSubmit(myForm)" #myForm="ngForm">
   <div class="input">
     <label for="title">Title</label>
-    <input
-      type="text"
-      name="title"
-      id="title"
-      required
-      [(ngModel)]="title"
-      (input)="checkBtnDisable()"
-    />
+    <input type="text" name="title" id="title" required [(ngModel)]="title" />
   </div>
 
   <div class="input">
     <label for="date">Date</label>
-    <input
-      type="date"
-      name="date"
-      id="date"
-      required
-      [(ngModel)]="date"
-      (input)="checkBtnDisable()"
-    />
+    <input type="date" name="date" id="date" required [(ngModel)]="date" />
   </div>
   <button
     type="submit"
-    [disabled]="buttonDisabled()"
-    [class]="buttonDisabled() ? 'disabledBtn' : ''"
+    [disabled]="!this.title() && this.date()"
+    [style]="this.title() && this.date() ? '' : 'opacity: 0.5'"
   >
     Create
   </button>
 </form>
 
 @if(dateError()){
-<p>If Chuck Norris cannot travel back in time, neither can you!</p>
-} @if(timerOn()){
-<button (click)="reset()">Reset Timer!</button>
+<div class="overlay" (click)="closeError()">
+  <div class="errorCard">
+    <h3>If Chuck Norris cannot travel back in time, neither can you!</h3>
+    <div
+      style="width: 100%; height: 0; padding-bottom: 100%; position: relative"
+    >
+      <iframe
+        src="https://giphy.com/embed/iGlrbH9llsi0AM378M"
+        width="100%"
+        height="100%"
+        style="position: absolute"
+        frameBorder="0"
+        class="giphy-embed"
+        allowFullScreen
+      ></iframe>
+    </div>
+    <button>Got it!</button>
+  </div>
+</div>
+} @if(timerOnForm()){
+<div class="resetBtnWrapper">
+  <button (click)="reset()">Reset Timer!</button>
+</div>
 }
