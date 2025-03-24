@@ -13,6 +13,7 @@ export class FormComponent {
   date = signal<string>('');
   dateError = signal<boolean>(false);
   buttonDisabled = signal<boolean>(true);
+  timerOn = signal<boolean>(false);
 
   form: Form = {} as Form;
 
@@ -36,6 +37,7 @@ export class FormComponent {
       this.timerService.setDate(new Date(this.date()));
       form.resetForm();
       this.timerService.triggerCountdown();
+      this.timerOn.set(true);
     }
   }
 
@@ -43,5 +45,7 @@ export class FormComponent {
     this.timerService.resetTimer();
     this.timerService.setTitle('');
     this.date.set('');
+    this.timerOn.set(false);
+    this.buttonDisabled.set(true);
   }
 }

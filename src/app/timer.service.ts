@@ -28,7 +28,7 @@ export class TimerService {
   }
 
   calculateCountdown() {
-    const now = new Date().getTime();
+    const now = new Date().getTime();              
     const difference = this.dateCountdown().getTime() - new Date().getTime();
     this.distance = this.dateCountdown().getTime() - now;
     this.days.set(Math.floor(difference / (1000 * 60 * 60 * 24)));

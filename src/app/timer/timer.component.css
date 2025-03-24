@@ -1,0 +1,15 @@
+h1 {
+  color: purple;
+  font-size: 10vw;
+  text-overflow: ellipsis;
+}
+
+p {
+  font-size: 4vw;
+}
+
+div {
+  text-align: center;
+  overflow-wrap: break-word;
+  max-width: calc(100vw - 20px);
+}
