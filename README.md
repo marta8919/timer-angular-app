@@ -15,6 +15,7 @@ or
 ```bash
 npm start
 ```
+
 Once the server is running, open your browser and the site will open at `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Goal
@@ -23,14 +24,12 @@ The goal of this project is for me to learn more about Angular.
 
 ## Features
 
-App enables the user to create a timer with a title and a date. The countdown will start when the form is submitted, as long as it passes the validations.
+- App enables the user to create a timer with a title and a date. 
 
-- Validations :
-    - Date should not be prior to the day the form is created.
+- The countdown starts when the form is submitted, as long as it passes the validation(Date should not be prior to the day the form is created / Form can only be submitted if title and date is provided).
 
-### WIP
+- Title and date will be set on the cookies so when user opens the app timer keeps going on.
 
-- [x] Storing the date on local storage.
-- [ ] Success screen when countdown is done.
-- [x] Responsive design.
+- Reset timer button enables user to reset the timer completely and clear the cookies previously set.
 
+- Message informing the user when the timer set on the cookies is completed.

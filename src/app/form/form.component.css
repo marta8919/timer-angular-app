@@ -16,11 +16,12 @@
   height: 30px;
 }
 
-form {
+.customForm {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 880px;
 }
 
 button {
@@ -41,25 +42,12 @@ button {
   text-align: center;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(235, 189, 255, 0.8);
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.errorCard {
-  background-color: white;
-  padding: 40px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
+
+@media (max-width: 670px) {
+  .customForm {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

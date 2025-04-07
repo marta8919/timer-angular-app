@@ -5,17 +5,17 @@ import { Injectable, signal } from '@angular/core';
 })
 export class TimerService {
   titleCountdown = signal<string>('');
-  dateCountdown = signal<Date>(new Date());
-
+  dateCountdown = signal<Date | undefined>(undefined);
   days = signal<number>(0);
   hours = signal<number>(0);
   minutes = signal<number>(0);
   seconds = signal<number>(0);
-  x: any;
   clearInterval = signal<boolean>(false);
   timerOn = signal<boolean>(false);
+  successScreen = signal<boolean>(false);
 
   distance: number | undefined;
+  x: any;
 
   constructor() {
     let localTitle = localStorage.getItem('title');
@@ -28,20 +28,20 @@ export class TimerService {
     }
   }
 
-  setTitle(title: string) {
+  setData(title: string, date: Date | undefined) {
     this.titleCountdown.set(title);
     localStorage.setItem('title', title);
-  }
-
-  setDate(date: Date) {
-    this.dateCountdown.set(date);
-    localStorage.setItem('date', date.toString());
+    if (typeof date !== undefined) {
+      this.dateCountdown.set(date);
+      localStorage.setItem('date', (date as Date).toString());
+    }
   }
 
   calculateCountdown() {
     const now = new Date().getTime();
-    const difference = this.dateCountdown().getTime() - new Date().getTime();
-    this.distance = this.dateCountdown().getTime() - now;
+    const date = this.dateCountdown() as Date;
+    const difference = date.getTime() - new Date().getTime();
+    this.distance = date.getTime() - now;
     this.days.set(Math.floor(difference / (1000 * 60 * 60 * 24)));
     this.hours.set(
       Math.floor((this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -56,8 +56,9 @@ export class TimerService {
     this.timerOn.set(true);
     this.x = setInterval(() => {
       this.calculateCountdown();
-      if (this.distance !== undefined && this.distance == 0) {
-        clearInterval(this.x);
+      if (this.distance !== undefined && this.distance <= 0) {
+        this.successScreen.set(true);
+        this.resetTimer();
       }
     }, 100);
   }
