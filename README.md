@@ -30,7 +30,7 @@ App enables the user to create a timer with a title and a date. The countdown wi
 
 ### WIP
 
-- [ ] Storing the date on local storage.
+- [x] Storing the date on local storage.
 - [ ] Success screen when countdown is done.
-- [ ] Responsive design.
+- [x] Responsive design.
 
