@@ -1,12 +1,25 @@
 <form (submit)="onSubmit(myForm)" #myForm="ngForm" class="customForm">
-  <div class="input">
+  <div class="inputContainer">
     <label for="title">Title</label>
-    <input type="text" name="title" id="title" required [(ngModel)]="title" />
+    <input
+      type="text"
+      name="title"
+      id="title"
+      required
+      [(ngModel)]="title"
+    />
   </div>
 
-  <div class="input">
+  <div class="inputContainer">
     <label for="date">Date</label>
-    <input type="date" name="date" id="date" required [(ngModel)]="date" />
+    <input
+      type="date"
+      name="date"
+      id="date"
+      required
+      [(ngModel)]="date"
+      class="dateInput"
+    />
   </div>
   <button
     type="submit"

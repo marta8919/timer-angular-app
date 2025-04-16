@@ -25,14 +25,16 @@ export class FormComponent {
 
   onSubmit(form: NgForm) {
     this.form = form;
-    if (new Date(this.date()).getTime() < new Date().getTime()) {
-      this.dateError.set(true);
-    } else {
-      this.dateError.set(false);
-      this.timerService.setData(this.title(), new Date(this.date()));
-      this.timerService.triggerCountdown();
-      this.timerOnForm.set(true);
-      form.resetForm();
+    if (this.title().length && this.date().length) {
+      if (new Date(this.date()).getTime() < new Date().getTime()) {
+        this.dateError.set(true);
+      } else {
+        this.dateError.set(false);
+        this.timerService.setData(this.title(), new Date(this.date()));
+        this.timerService.triggerCountdown();
+        this.timerOnForm.set(true);
+        form.resetForm();
+      }
     }
   }
 
