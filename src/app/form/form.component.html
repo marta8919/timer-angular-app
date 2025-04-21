@@ -1,4 +1,4 @@
-<form (keydown.enter)="onSubmit(myForm)" #myForm="ngForm" class="customForm">
+<form (submit)="onSubmit(myForm)" #myForm="ngForm" class="customForm">
   <div class="inputContainer">
     <label for="title">Title</label>
     <input type="text" name="title" id="title" required [(ngModel)]="title" />
