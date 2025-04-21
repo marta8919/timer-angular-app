@@ -15,6 +15,13 @@
       class="dateInput"
     />
   </div>
+  <button
+  type="submit"
+  [disabled]="!this.title() && this.date()"
+  [style]="this.title() && this.date() ? '' : 'opacity: 0.5'"
+>
+  Create
+</button>
 </form>
 
 @if(dateError()){
