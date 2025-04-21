@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, output } from '@angular/core'
 
 @Component({
   selector: 'app-error-message',
@@ -7,9 +7,9 @@ import { Component, output } from '@angular/core';
   styleUrl: './error-message.component.css',
 })
 export class ErrorMessageComponent {
-  close = output();
+  close = output()
 
   closeError() {
-    this.close.emit();
+    this.close.emit()
   }
 }

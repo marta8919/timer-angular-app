@@ -1,8 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
-import { Form, FormsModule, NgForm } from '@angular/forms';
-import { TimerService } from '../timer.service';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { SuccessMessageComponent } from '../success-message/success-message.component';
+import { Component, inject, signal } from '@angular/core'
+import { Form, FormsModule, NgForm } from '@angular/forms'
+import { TimerService } from '../timer.service'
+import { ErrorMessageComponent } from '../error-message/error-message.component'
+import { SuccessMessageComponent } from '../success-message/success-message.component'
 
 @Component({
   selector: 'app-form',
@@ -11,46 +11,50 @@ import { SuccessMessageComponent } from '../success-message/success-message.comp
   styleUrl: './form.component.css',
 })
 export class FormComponent {
-  title = signal<string>('');
-  date = signal<string>('');
-  dateError = signal<boolean>(false);
-  buttonDisabled = signal<boolean>(true);
+  title = signal<string>('')
+  date = signal<string>('')
+  dateError = signal<boolean>(false)
+  buttonDisabled = signal<boolean>(true)
 
-  form: Form = {} as Form;
+  form: Form = {} as Form
 
-  private timerService = inject(TimerService);
+  private timerService = inject(TimerService)
 
-  timerOnForm = this.timerService.timerOn;
-  successScreenOnForm = this.timerService.successScreen;
+  timerOnForm = this.timerService.timerOn
+  successScreenOnForm = this.timerService.successScreen
 
   onSubmit(form: NgForm) {
-    this.form = form;
+    this.form = form
     if (this.title().length && this.date().length) {
+      if (this.timerOnForm()) {
+        this.reset()
+      }
+
       if (new Date(this.date()).getTime() < new Date().getTime()) {
-        this.dateError.set(true);
+        this.dateError.set(true)
       } else {
-        this.dateError.set(false);
-        this.timerService.setData(this.title(), new Date(this.date()));
-        this.timerService.triggerCountdown();
-        this.timerOnForm.set(true);
-        form.resetForm();
+        this.dateError.set(false)
+        this.timerService.setData(this.title(), new Date(this.date()))
+        this.timerService.triggerCountdown()
+        this.timerOnForm.set(true)
+        form.resetForm()
       }
     }
   }
 
   reset() {
-    this.timerService.resetTimer();
-    this.timerService.setData('', new Date());
-    this.timerOnForm.set(false);
-    this.buttonDisabled.set(true);
+    this.timerService.resetTimer()
+    this.timerService.setData('', new Date())
+    this.timerOnForm.set(false)
+    this.buttonDisabled.set(true)
   }
 
   closeError() {
-    this.dateError.set(false);
+    this.dateError.set(false)
   }
 
   closeSuccess() {
-    this.successScreenOnForm.set(false);
-    this.timerService.setData('', undefined);
+    this.successScreenOnForm.set(false)
+    this.timerService.setData('', undefined)
   }
 }

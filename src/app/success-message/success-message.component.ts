@@ -1,5 +1,5 @@
-import { Component, inject, output } from '@angular/core';
-import { TimerService } from '../timer.service';
+import { Component, inject, output } from '@angular/core'
+import { TimerService } from '../timer.service'
 
 @Component({
   selector: 'app-success-message',
@@ -8,13 +8,13 @@ import { TimerService } from '../timer.service';
   styleUrl: './success-message.component.css',
 })
 export class SuccessMessageComponent {
-  close = output();
+  close = output()
 
-  private timerService = inject(TimerService);
+  private timerService = inject(TimerService)
 
-  title = this.timerService.titleCountdown;
+  title = this.timerService.titleCountdown
 
   closeSuccess() {
-    this.close.emit();
+    this.close.emit()
   }
 }

@@ -16,20 +16,24 @@
     />
   </div>
   <button
-  type="submit"
-  [disabled]="!this.title() && this.date()"
-  [style]="this.title() && this.date() ? '' : 'opacity: 0.5'"
->
-  Create
-</button>
+    type="submit"
+    [disabled]="!this.title() && this.date()"
+    [style]="this.title() && this.date() ? '' : 'opacity: 0.5'"
+  >
+    Create
+  </button>
 </form>
 
-@if(dateError()){
-<app-error-message (close)="closeError()" />
-} @if(timerOnForm()){
-<div class="resetBtnWrapper">
-  <button (click)="reset()">Reset Timer!</button>
-</div>
-} @if(successScreenOnForm()){
-<app-success-message (close)="closeSuccess()" />
+@if (dateError()) {
+  <app-error-message (close)="closeError()" />
+}
+
+@if (timerOnForm()) {
+  <div class="resetBtnWrapper">
+    <button (click)="reset()">Reset Timer!</button>
+  </div>
+}
+
+@if (successScreenOnForm()) {
+  <app-success-message (close)="closeSuccess()" />
 }

@@ -17,11 +17,11 @@
   height: 30px;
 }
 
-.dateInput[type="date"]::-webkit-calendar-picker-indicator {
+.dateInput[type='date']::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-.dateInput[type="date"]::-webkit-calendar-picker-indicator:focus {
+.dateInput[type='date']::-webkit-calendar-picker-indicator:focus {
   visibility: hidden;
 }
 
