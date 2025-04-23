@@ -18,15 +18,12 @@ export class FormComponent {
 
   form: Form = {} as Form
 
-  private timerService = inject(TimerService)
-
-  timerOnForm = this.timerService.timerOn
-  successScreenOnForm = this.timerService.successScreen
+  public timerService = inject(TimerService)
 
   onSubmit(form: NgForm) {
     this.form = form
     if (this.title().length && this.date().length) {
-      if (this.timerOnForm()) {
+      if (this.timerService.timerOn()) {
         this.reset()
       }
 
@@ -36,7 +33,7 @@ export class FormComponent {
         this.dateError.set(false)
         this.timerService.setData(this.title(), new Date(this.date()))
         this.timerService.triggerCountdown()
-        this.timerOnForm.set(true)
+        this.timerService.timerOn.set(true)
         form.resetForm()
       }
     }
@@ -45,7 +42,7 @@ export class FormComponent {
   reset() {
     this.timerService.resetTimer()
     this.timerService.setData('', new Date())
-    this.timerOnForm.set(false)
+    this.timerService.timerOn.set(false)
     this.buttonDisabled.set(true)
   }
 
@@ -54,7 +51,7 @@ export class FormComponent {
   }
 
   closeSuccess() {
-    this.successScreenOnForm.set(false)
-    this.timerService.setData('', undefined)
+    this.timerService.successScreen.set(false)
+    this.timerService.setData('')
   }
 }

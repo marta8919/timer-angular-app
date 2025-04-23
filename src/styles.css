@@ -1,8 +1,7 @@
-
-
 @font-face {
   font-family: 'OpenSauceOne';
-  src: url('assets/font/OpenSauceOne/OpenSauceOne-Regular.woff') format('truetype');
+  src: url('assets/font/OpenSauceOne/OpenSauceOne-Regular.woff')
+    format('truetype');
   font-weight: normal;
   font-style: normal;
 }

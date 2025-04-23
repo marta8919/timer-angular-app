@@ -4,17 +4,17 @@ import { Injectable, signal } from '@angular/core'
   providedIn: 'root',
 })
 export class TimerService {
-  titleCountdown = signal<string>('')
-  dateCountdown = signal<Date | undefined>(undefined)
-  days = signal<number>(0)
-  hours = signal<number>(0)
-  minutes = signal<number>(0)
-  seconds = signal<number>(0)
-  timerOn = signal<boolean>(false)
-  successScreen = signal<boolean>(false)
+  readonly titleCountdown = signal<string>('')
+  readonly dateCountdown = signal<Date | undefined>(undefined)
+  readonly days = signal<number>(0)
+  readonly hours = signal<number>(0)
+  readonly minutes = signal<number>(0)
+  readonly seconds = signal<number>(0)
+  readonly timerOn = signal<boolean>(false)
+  readonly successScreen = signal<boolean>(false)
 
   distance: number | undefined
-  x: any
+  interval: ReturnType<typeof setInterval> | null = null
 
   constructor() {
     let localTitle = localStorage.getItem('title')
@@ -27,10 +27,10 @@ export class TimerService {
     }
   }
 
-  setData(title: string, date: Date | undefined) {
+  setData(title: string, date?: Date) {
     this.titleCountdown.set(title)
     localStorage.setItem('title', title)
-    if (typeof date !== undefined) {
+    if (date) {
       this.dateCountdown.set(date)
       localStorage.setItem('date', (date as Date).toString())
     }
@@ -53,17 +53,17 @@ export class TimerService {
 
   triggerCountdown() {
     this.timerOn.set(true)
-    this.x = setInterval(() => {
+    this.interval = setInterval(() => {
       this.calculateCountdown()
       if (this.distance !== undefined && this.distance <= 0) {
         this.successScreen.set(true)
         this.resetTimer()
       }
-    }, 100)
+    }, 1000)
   }
 
   resetTimer() {
-    clearInterval(this.x)
+    if (this.interval) clearInterval(this.interval)
     this.timerOn.set(false)
     localStorage.clear()
   }

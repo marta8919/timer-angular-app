@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, computed, inject } from '@angular/core'
 import { TimerService } from '../timer.service'
 import { AdjustToScreenDirective } from '../adjust-to-screen.directive'
 
@@ -9,11 +9,12 @@ import { AdjustToScreenDirective } from '../adjust-to-screen.directive'
   styleUrl: './timer.component.css',
 })
 export class TimerComponent {
-  private timerService = inject(TimerService)
+  public timer = inject(TimerService)
 
-  title = this.timerService.titleCountdown
-  days = this.timerService.days
-  hours = this.timerService.hours
-  minutes = this.timerService.minutes
-  seconds = this.timerService.seconds
+  timeTrigger = computed(
+    () =>
+      `${this.timer.days()}-${this.timer.hours()}-${this.timer.minutes()}-${this.timer.seconds()}`,
+  )
+
+  titleTrigger = computed(() => `${this.timer.titleCountdown()}`)
 }

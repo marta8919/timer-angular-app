@@ -10,9 +10,7 @@ import { TimerService } from '../timer.service'
 export class SuccessMessageComponent {
   close = output()
 
-  private timerService = inject(TimerService)
-
-  title = this.timerService.titleCountdown
+  public timerService = inject(TimerService)
 
   closeSuccess() {
     this.close.emit()

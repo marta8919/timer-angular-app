@@ -1,13 +1,25 @@
-@if (title().length) {
+@if (timer.titleCountdown().length) {
   <div>
-    <h1 appAdjustToScreen>Time left to {{ title() }}</h1>
-    <p appAdjustToScreen>
-      {{ days() }} days, {{ hours() }} h, {{ minutes() }}m,
-      {{ seconds() }}s
-    </p>
+    <h1
+      appAdjustToScreen
+      [appAdjustToScreenTrigger]="titleTrigger()"
+      class="mainTitle"
+    >
+      Time left to {{ timer.titleCountdown() }}
+    </h1>
+    <h1
+      class="secondaryTitle"
+      appAdjustToScreen
+      [appAdjustToScreenTrigger]="timeTrigger()"
+    >
+      {{ timer.days() }} days, {{ timer.hours() }} h, {{ timer.minutes() }}m,
+      {{ timer.seconds() }}s
+    </h1>
   </div>
 } @else {
   <div>
-    <h1 appAdjustToScreen>Set your title in the form below.</h1>
+    <h1 appAdjustToScreen class="mainTitle">
+      Set your title in the form below.
+    </h1>
   </div>
 }

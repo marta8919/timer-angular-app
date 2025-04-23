@@ -20,16 +20,28 @@ Once the server is running, open your browser and the site will open at `http://
 
 ## Goal
 
-The goal of this project is for me to learn more about Angular.
+The goal of this project is to complete a technical challenge build in Angular.
 
-## Features
+## Core Features
 
-- App enables the user to create a timer with a title and a date. 
+- App enables the user to create a timer with a title and a date.
 
-- The countdown starts when the form is submitted, as long as it passes the validation(Date should not be prior to the day the form is created / Form can only be submitted if title and date is provided).
+- Countdown starts inmedidatelly after submitting the form and updates every second.
 
-- Title and date will be set on the cookies so when user opens the app timer keeps going on.
+- Title and date will be set on the local storage so data is consistent across reloads.
 
-- Reset timer button enables user to reset the timer completely and clear the cookies previously set.
+- Font size of the title and countdown is adjusted to the width of the screen.
 
-- Message informing the user when the timer set on the cookies is completed.
+
+## Extra Features
+
+- Validations added so form cannot be submited if the user does not input all the data necessary.
+
+- Feedback message in case user inputs a date prior to the current day.
+
+- Submit button added for better accessibility.
+
+- Reset timer button added to stop the running timer.
+
+- Success message in place when a timer reaches the desired date.
+

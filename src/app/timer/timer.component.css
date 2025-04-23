@@ -1,10 +1,9 @@
-h1 {
+.mainTitle {
   color: #72035d;
-  text-overflow: ellipsis;
   font-weight: 800;
 }
 
-p {
+.secondaryTitle {
   font-weight: 400;
 }
 

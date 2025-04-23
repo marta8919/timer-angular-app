@@ -28,12 +28,12 @@
   <app-error-message (close)="closeError()" />
 }
 
-@if (timerOnForm()) {
+@if (timerService.timerOn()) {
   <div class="resetBtnWrapper">
     <button (click)="reset()">Reset Timer!</button>
   </div>
 }
 
-@if (successScreenOnForm()) {
+@if (timerService.successScreen()) {
   <app-success-message (close)="closeSuccess()" />
 }

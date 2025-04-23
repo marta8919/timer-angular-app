@@ -1,20 +1,21 @@
 import {
   Directive,
   ElementRef,
-  HostListener,
-  AfterViewInit,
   Renderer2,
-  signal,
+  AfterViewInit,
+  Input,
+  HostListener,
 } from '@angular/core'
 
 @Directive({
   selector: '[appAdjustToScreen]',
 })
 export class AdjustToScreenDirective implements AfterViewInit {
-  minFontSize = signal<number>(10)
-  maxFontSize = signal<number>(300)
+  @Input('appAdjustToScreenTrigger') trigger: string | undefined
 
-  el: HTMLElement
+  private minFontSize = 10
+  private maxFontSize = 600
+  private el: HTMLElement
 
   constructor(
     public elementRef: ElementRef,
@@ -24,25 +25,33 @@ export class AdjustToScreenDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.resizeText()
+    this.deferResize()
   }
 
   @HostListener('window:resize')
   onResize() {
-    this.resizeText()
+    this.deferResize()
   }
 
-  resizeText() {
+  ngOnChanges() {
+    this.deferResize()
+  }
+
+  private deferResize() {
+    setTimeout(() => this.resizeText(), 0)
+  }
+
+  public resizeText() {
     const parent = this.el.parentElement
     if (!parent) return
 
-    let fontSize = this.maxFontSize()
+    let fontSize = this.maxFontSize
 
     this.renderer.setStyle(this.el, 'white-space', 'nowrap')
 
-    while (fontSize >= this.minFontSize()) {
+    while (fontSize >= this.minFontSize) {
       this.renderer.setStyle(this.el, 'font-size', `${fontSize}px`)
-      const { scrollWidth, clientWidth } = this.el
+      const { scrollWidth } = this.el
 
       if (scrollWidth <= parent.clientWidth) {
         break
