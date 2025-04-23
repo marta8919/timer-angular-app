@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core'
 import { TimerService } from '../timer.service'
+import { AdjustToScreenDirective } from '../adjust-to-screen.directive'
 
 @Component({
   selector: 'app-timer',
-  imports: [],
+  imports: [AdjustToScreenDirective],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })

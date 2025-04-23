@@ -1,13 +1,13 @@
 @if (title().length) {
   <div>
-    <h1>Time left to {{ title() }}</h1>
-    <p>
-      {{ days() }} days, {{ hours() }} hours, {{ minutes() }} minutes and
-      {{ seconds() }} seconds
+    <h1 appAdjustToScreen>Time left to {{ title() }}</h1>
+    <p appAdjustToScreen>
+      {{ days() }} days, {{ hours() }} h, {{ minutes() }}m,
+      {{ seconds() }}s
     </p>
   </div>
 } @else {
   <div>
-    <h1>Set your title in the form below.</h1>
+    <h1 appAdjustToScreen>Set your title in the form below.</h1>
   </div>
 }
